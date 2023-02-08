@@ -34,7 +34,21 @@ public class ActivityServiceImpl implements ActivityService {
     @Override
     public List<Activity> findByDay(Day day) {
         // TO DO: get a list of activities that match the day
-        return null;
+
+        // Storage sementara penyimpan daftar aplikasi harian
+        List<Activity> activitiesByDay = new ArrayList<>();
+        Iterator<Activity> it = activityRepository.findAll(); // = activityInMemory.iterator()
+
+        // Iterating over collection 'it' using for-each
+        // Reference: https://www.geeksforgeeks.org/iterator-vs-foreach-in-java/
+        while(it.hasNext()) {
+            Activity a = it.next(); // ERROR OBJECT != ACTIVITY
+            if (a.getDay() == day) {
+                activitiesByDay.add(a);
+            }
+        }
+
+        return activitiesByDay;
     }
 
 }
