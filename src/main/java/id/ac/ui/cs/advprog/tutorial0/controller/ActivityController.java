@@ -40,8 +40,13 @@ public class ActivityController {
     @GetMapping("/list/{day}")
     public String indexWithPathVariable(@PathVariable("day") String day, Model model) {
         Day dayEnum = Day.valueOf(Day.class, day.toUpperCase());
-        // TO DO: call the appropriate service and send the returned value to the HTML file
-        return null;
+        // TO DO: call the appropriate service and send the returned value to the HTML file [DONE]
+
+        // Memanggil daftar aktivitas sesuai path /{day}
+        // Mengumpulkan activity berdasarkan hari lalu ditembak ke activityList.html
+        List<Activity> activitiesByDay = service.findByDay(dayEnum);
+        model.addAttribute("activities", activitiesByDay);
+        return "activityList";
     }
 
 }
